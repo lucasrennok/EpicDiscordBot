@@ -2,5 +2,7 @@
 Creating a Bot for discord...
 
 **Downloads:**
-- npm install --save express discord.js
+- npm install --save discord.js
+- npm install dotenv --save
 
+I am not using express now...

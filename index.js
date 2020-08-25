@@ -1,34 +1,28 @@
-const express = require('express');
-const app = express();
-app.get("/", (request, response) => {
-  const ping = new Date();
-  ping.setHours(ping.getHours() - 3);
-  console.log(`Ping recebido às ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`);
-  response.sendStatus(200);
+const Discord = require("discord.js");
+const config = require("./config.json"); 
+require('dotenv').config();
+
+const client = new Discord.Client(); 
+
+client.on("ready", () => {
+  console.log(`Bot foi iniciado, com ${client.users.size} usuários, em ${client.channels.size} canais, em ${client.guilds.size} servidores.`); 
 });
-app.listen(process.env.PORT); // Recebe solicitações que o deixa online
 
-const Discord = require("discord.js"); //Conexão com a livraria Discord.js
-const client = new Discord.Client(); //Criação de um novo Client
-const config = require("./config.json"); //Pegando o prefixo do bot para respostas de comandos
+client.on("message", async message => {
 
-client.login(process.env.TOKEN); //Ligando o Bot caso ele consiga acessar o token
+    if(message.author.bot) return;
+    if(message.channel.type === "dm") return;
+    if(!message.content.startsWith(config.prefix)) return;
 
-// client.on('mem', message => {
-//      if (message.author.bot) return;
-//      if (message.channel.type == 'dm') return;
-//      if (!message.content.toLowerCase().startsWith(config.prefix.toLowerCase())) return;
-//      if (message.content.startsWith(`<@!${client.user.id}>`) || message.content.startsWith(`<@${client.user.id}>`)) return;
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const comando = args.shift().toLowerCase();
+  
+  // ping
+  if(comando === "ping") {
+    const m = await message.channel.send("Ping?");
+    m.edit(`Pong! A Latência é ${m.createdTimestamp - message.createdTimestamp}ms. A Latencia da API é ${Math.round(client.ping)}ms`);
+  }
 
-//     const args = message.content
-//         .trim().slice(config.prefix.length)
-//         .split(/ +/g);
-//     const command = args.shift().toLowerCase();
+});
 
-//     try {
-//         const commandFile = require(`./commands/${command}.js`)
-//         commandFile.run(client, message, args);
-//     } catch (err) {
-//     console.error('Erro:' + err);
-//   }
-// });
+client.login(process.env.TOKEN);

@@ -21,7 +21,26 @@ const phrases = [
     "Como assim largou o emprego? Largar é para bebida e cigarro!",
     "Metade do serviço de casa eu faço melhor do que você. E não é muito difícil...",
     "Quando eu era garoto não precisava de roupa especial, ter roupa já era especial.",
-    "Eu ganhei meus primeiros U$25,00 com 30 anos de idade... E ainda não gastei tudo."
+    "Eu ganhei meus primeiros U$25,00 com 30 anos de idade... E ainda não gastei tudo.",
+    "Achou que eu tava brincando?",
+    "Eu vou estar lá",
+    "Você vai descobrir o que eu vou fazer. Acha que eu to brincando é? Quando estiver no chuveiro, eu vou estar lá.",
+    "Quando estiver vendo TV, eu vou estar lá.",
+    "Até mesmo nos seus sonhos, eu vou estar lá.",
+    "Vai ficar tudo bem.",
+    "Achei uma moeda! Eu te amo moeda. Vou ficar com você e vai se chamar Bernardo.",
+    "Eu achei 1 dólar!",
+    "2 dólares e 89 centavos em alimentos? O que você quer? Alimentar os famintos ou ficar faminto?",
+    "Eu não vou dar dinheiro para você, pra você ficar por ai a toa.",
+    "Você quer mesada? Você já dorme aqui o mês inteiro, você já come as suas batatas, você usa a minha eletricidade, você toma o suco que eu pago, você come a vagem que eu como, você pode assistir a minha televisão, você pode estourar a minha conta de gás, eu deixo você subir as minhas escadas, você pode me fazer essas perguntas ridículas. Por que que eu tenho que te dar uma mesada quando já pago tudo o que você precisa!",
+    "Quem você acha que ganha mesada, hein?",
+    "Parece que o Greg ganha mais do que... pede mesada pra ele.",
+    "Então você é um filhinho da mamãe!",
+    "Presta atenção filhinho da mamãe, fique longe da minha filha, você ta me ouvindo?",
+    "Quanto custa?",
+    "Não precisamos comer em lanchonete. Eu guardei mortadela na mala do carro, vou encostar.",
+    "Eu sei que você não vai jogar o mingau fora, come aí, a veia custou 30 centavos.",
+    "Eu quero uma ligação a cobrar. Papai bem Nebrasca milharal Chris lixo desliga."
 ]
 
 module.exports.run = async (client, message, args) => {

@@ -8,6 +8,12 @@ client.on("ready", () => {
   console.log('Bot successfully started'); 
 });
 
+client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+  if (!channel) return;
+  channel.send("Bem vindo, "+member,". Entrar no servidor vai lhe custar 1 dólar.");
+});
+
 client.on("message", async message => {
 
   if(message.author.bot) return;
@@ -21,7 +27,7 @@ client.on("message", async message => {
     const commandFile = require('./commands/'+command+'.js')
     commandFile.run(client, message, args);
   }catch(er){
-    await message.channel.send("> Type $$help to get the available commands.");
+    await message.channel.send("> Type $help to get the available commands.");
   }
 
 });

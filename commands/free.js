@@ -14,15 +14,19 @@ module.exports.run = async (client, message, args) => {
         });
 
     let freeGames = "> **Free Games:**\n";
+    let startDate = 'undefined'
     for(let i=0; i<someFreeGamesComing.length; i++){
-        freeGames += "> "+someFreeGamesComing[i].title+"\n";
+        if(someFreeGamesComing[i].promotions.promotionalOffers.length!==0){
+            startDate = new Date(someFreeGamesComing[i].promotions.promotionalOffers[0].promotionalOffers[0].startDate)
+        }else if(someFreeGamesComing[i].promotions.upcomingPromotionalOffers.length!==0){
+            startDate = new Date(someFreeGamesComing[i].promotions.upcomingPromotionalOffers[0].promotionalOffers[0].startDate)
+        }
+        freeGames += "> **"+someFreeGamesComing[i].title+"** - Date: "+startDate+"\n";
     }
+    //TODO: show game thumb images / format date / set emojis to free games and non free games yet
 
     if(freeGames==="> **Free Games:**\n"){
         freeGames+="> There aren't free games now.\n";
     }
     await message.channel.send(freeGames);
-    
-    // let date = new Date(someFreeGamesComing[0].price.lineOffers[0].appliedRules[0].endDate)
-    // console.log(date);
 };

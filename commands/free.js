@@ -6,19 +6,23 @@ const urlEpicFreeGames = "https://store-site-backend-static.ak.epicgames.com/fre
 module.exports.run = async (client, message, args) => {
     await message.channel.send("O que seria melhor que um jogo de graça não é mesmo?")
     
-    let freeGames = [];
+    let someFreeGamesComing = [];
     await fetch(urlEpicFreeGames)
         .then(response => response.json())
         .then((data) => {
-            freeGames = data.data.Catalog.searchStore.elements;
+            someFreeGamesComing = data.data.Catalog.searchStore.elements;
         });
 
-    // let freeGamesNow = {}
-    for(let game in freeGames){
-        console.log(game);
-        // freeGamesNow = {...freeGamesNow, "title": game.title, }
+    let freeGames = "> **Free Games:**\n";
+    for(let i=0; i<someFreeGamesComing.length; i++){
+        freeGames += "> "+someFreeGamesComing[i].title+"\n";
     }
 
-    let date = new Date(freeGames[0].price.lineOffers[0].appliedRules[0].endDate)
-    console.log(date);
+    if(freeGames==="> **Free Games:**\n"){
+        freeGames+="> There aren't free games now.\n";
+    }
+    await message.channel.send(freeGames);
+    
+    // let date = new Date(someFreeGamesComing[0].price.lineOffers[0].appliedRules[0].endDate)
+    // console.log(date);
 };

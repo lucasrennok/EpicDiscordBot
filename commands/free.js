@@ -6,6 +6,19 @@ const urlEpicFreeGames = "https://store-site-backend-static.ak.epicgames.com/fre
 module.exports.run = async (client, message, args) => {
     await message.channel.send("O que seria melhor que um jogo de graça não é mesmo?")
     
+    let free_flag = 'all';
+    if(args.length>1){
+        await message.channel.send("> Error: Too many argments.");
+        return;
+    }else if(args.length===1){
+        if(args[0]==='all' || args[0]==='now' || args[0]==='next'){
+            free_flag = args[0];
+        }else{
+            await message.channel.send("> Error: Incorrect argument.");
+            return;
+        }
+    }
+
     let someFreeGamesComing = [];
     await fetch(urlEpicFreeGames)
         .then(response => response.json())
@@ -37,13 +50,22 @@ module.exports.run = async (client, message, args) => {
         let formatEndDate = endDate.getDate()+'/'+(endDate.getMonth()+1)+'/'+endDate.getFullYear()
         let formatGameArriveDate = gameArriveDate.getDate()+'/'+(gameArriveDate.getMonth()+1)+'/'+gameArriveDate.getFullYear()
 
+        let thumbnailImage = '', gameImage = ''
+        let urlImagesVector = someFreeGamesComing[i].keyImages
+        for(let i=0; i<urlImagesVector.length; i++){
+            if(urlImagesVector[i].type==='OfferImageTall')
+                gameImage=urlImagesVector[i].url;
+            else if(urlImagesVector[i].type==='OfferImageWide')
+                thumbnailImage=urlImagesVector[i].url;
+        }
+
         const embedFreeGame = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle(someFreeGamesComing[i].title)
             .setURL('https://www.epicgames.com/store/pt-BR/product/'+someFreeGamesComing[i].productSlug)
             .setAuthor('Epic Julius', 'https://cdn.pixabay.com/photo/2020/05/08/10/10/symbol-5145011_960_720.png')
             .setDescription(someFreeGamesComing[i].description)
-            .setThumbnail(encodeURI(someFreeGamesComing[i].keyImages[0].url))
+            .setThumbnail(encodeURI(thumbnailImage))
             .addFields(
                 { name: 'Start Date', value: formatStartDate, inline: true },
                 { name: 'End Date', value: formatEndDate, inline: true },
@@ -51,7 +73,7 @@ module.exports.run = async (client, message, args) => {
                 { name: 'Original Price:', value: originalPrice, inline: true },
                 { name: 'Discount Price:', value: discountPrice, inline: true },
             )
-            .setImage(encodeURI(someFreeGamesComing[i].keyImages[1].url))
+            .setImage(encodeURI(gameImage))
             .setTimestamp()
             .setFooter('Game Arrived/Arrive in Epic Games: '+ formatGameArriveDate);
         await message.channel.send(embedFreeGame);

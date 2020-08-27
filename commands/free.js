@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 const urlEpicFreeGames = "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions";
 
 module.exports.run = async (client, message, args) => {
-    await message.channel.send("O que seria melhor que um jogo de graça não é mesmo?")
+    await message.channel.send("What would be better than a free game?")
     
     let free_flag = 'all';
     if(args.length>1){

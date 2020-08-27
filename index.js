@@ -4,10 +4,10 @@ const app = express();
 app.get("/", (request, response) => {
   const ping = new Date();
   ping.setHours(ping.getHours() - 3);
-  console.log(`Ping recebido às ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`);
+  console.log(`Ping received at ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`);
 
   const dateNow = new Date()
-  if(dateNow.getDay()===4 && (dateNow.getHours()-3)===17 && dateNow.getMinutes()<=10){
+  if(dateNow.getDay()===4 && (dateNow.getHours()-3)===19 && dateNow.getMinutes()<=25){
     const guildList = client.guilds.cache;
     for(let i of guildList){
       const channel = i[1].channels.cache.find(channel => channel.name === 'julius')
@@ -21,7 +21,7 @@ app.get("/", (request, response) => {
 
   response.sendStatus(200);
 });
-app.listen(3333);
+app.listen(3333); //or process.env.PORT
 
 const Discord = require("discord.js");
 const config = require("./config.json"); 

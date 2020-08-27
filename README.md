@@ -4,6 +4,6 @@ Creating a Bot for discord...
 **Downloads:**
 - npm install --save discord.js
 - npm install dotenv --save
-- npm i node-fetch --save
-
-I am not using express now...
+- npm install node-fetch --save
+- npm install --save google-translate-open-api
+- npm install --save express

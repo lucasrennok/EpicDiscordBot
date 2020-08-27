@@ -1,8 +1,26 @@
+const express = require('express');
+const app = express();
+
+app.get("/", (request, response) => {
+  const ping = new Date();
+  ping.setHours(ping.getHours() - 3);
+  console.log(`Ping recebido às ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`);
+
+  const guildList = client.guilds.cache;
+  for(let i of guildList){
+    const channel = i[1].channels.cache.find(channel => channel.name === 'julius')
+    if(channel!==undefined)
+      channel.send('test')
+  }
+
+  response.sendStatus(200);
+});
+app.listen(3333);
+
 const Discord = require("discord.js");
 const config = require("./config.json"); 
-require('dotenv').config();
-
 const client = new Discord.Client(); 
+require('dotenv').config();
 
 client.on("ready", () => {
   console.log('Bot successfully started'); 
@@ -29,7 +47,6 @@ client.on("message", async message => {
   }catch(er){
     await message.channel.send("> Type $help to get the available commands.");
   }
-
 });
 
 client.login(process.env.TOKEN);

@@ -6,11 +6,17 @@ app.get("/", (request, response) => {
   ping.setHours(ping.getHours() - 3);
   console.log(`Ping recebido às ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`);
 
-  const guildList = client.guilds.cache;
-  for(let i of guildList){
-    const channel = i[1].channels.cache.find(channel => channel.name === 'julius')
-    if(channel!==undefined)
-      channel.send('test')
+  const dateNow = new Date()
+  if(dateNow.getDay()===4 && dateNow.getHours()>13 && dateNow.getHours()<14 && dateNow.getMinutes()<10){
+    const guildList = client.guilds.cache;
+    for(let i of guildList){
+      const channel = i[1].channels.cache.find(channel => channel.name === 'julius')
+      if(channel!==undefined){
+        const commandFile = require('./commands/free.js')
+        message = {channel: channel}
+        commandFile.run(client, message, []);
+      }
+    }
   }
 
   response.sendStatus(200);

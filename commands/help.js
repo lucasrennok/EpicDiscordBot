@@ -4,7 +4,7 @@ const allCommands = [
     "help",
     "speak",
     "ping",
-    "free"
+    "free -> all now next"
 ]
 
 module.exports.run = async (client, message, args) => {

@@ -7,7 +7,7 @@ app.get("/", (request, response) => {
   console.log(`Ping recebido às ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`);
 
   const dateNow = new Date()
-  if(dateNow.getDay()===4 && dateNow.getHours()>13 && dateNow.getHours()<14 && dateNow.getMinutes()<10){
+  if(dateNow.getDay()===4 && (dateNow.getHours()-3)===17 && dateNow.getMinutes()<=10){
     const guildList = client.guilds.cache;
     for(let i of guildList){
       const channel = i[1].channels.cache.find(channel => channel.name === 'julius')

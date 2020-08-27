@@ -29,12 +29,17 @@ module.exports.run = async (client, message, args) => {
     let startDate = 'undefined'
     let endDate = 'undefined'
     for(let i=0; i<someFreeGamesComing.length; i++){
-        if(someFreeGamesComing[i].promotions.promotionalOffers.length!==0){
-            startDate = new Date(someFreeGamesComing[i].promotions.promotionalOffers[0].promotionalOffers[0].startDate)
-            endDate = new Date(someFreeGamesComing[i].promotions.promotionalOffers[0].promotionalOffers[0].endDate)
-        }else if(someFreeGamesComing[i].promotions.upcomingPromotionalOffers.length!==0){
-            startDate = new Date(someFreeGamesComing[i].promotions.upcomingPromotionalOffers[0].promotionalOffers[0].startDate)
-            endDate = new Date(someFreeGamesComing[i].promotions.upcomingPromotionalOffers[0].promotionalOffers[0].endDate)
+        if(someFreeGamesComing[i].promotions!==null){
+            if(someFreeGamesComing[i].promotions.promotionalOffers.length!==0){
+                startDate = new Date(someFreeGamesComing[i].promotions.promotionalOffers[0].promotionalOffers[0].startDate)
+                endDate = new Date(someFreeGamesComing[i].promotions.promotionalOffers[0].promotionalOffers[0].endDate)
+            }else if(someFreeGamesComing[i].promotions.upcomingPromotionalOffers.length!==0){
+                startDate = new Date(someFreeGamesComing[i].promotions.upcomingPromotionalOffers[0].promotionalOffers[0].startDate)
+                endDate = new Date(someFreeGamesComing[i].promotions.upcomingPromotionalOffers[0].promotionalOffers[0].endDate)
+            }
+        }else{
+            startDate = new Date();
+            endDate = new Date();
         }
 
         let willSend = true;

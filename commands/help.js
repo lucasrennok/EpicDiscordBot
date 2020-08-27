@@ -2,8 +2,9 @@ const Discord = require("discord.js");
 
 const allCommands = [
     "help",
-    "say",
-    "ping"
+    "speak",
+    "ping",
+    "free"
 ]
 
 module.exports.run = async (client, message, args) => {

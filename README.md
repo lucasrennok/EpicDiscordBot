@@ -4,7 +4,9 @@ How about be notified about new free games at epic store?
 
 ![executing](/imgs/executing.gif)
 
-Add this bot to your server: [Epic Julius]()
+:tada: Add this bot to your server:
+
+> https://discord.com/oauth2/authorize?client_id=747636000083279873&scope=bot&permissions=8
 
 ## :fast_forward: Commands
 These are the available commands:

@@ -8,5 +8,5 @@ const allCommands = [
 ]
 
 module.exports.run = async (client, message, args) => {
-    await message.channel.send("> **Commands:** " + allCommands + '\n\n > **Create a chat called \'julius\' to receive notifications automatically.**')
+    await message.channel.send("> **Commands:** " + allCommands + '\n> \n > **Create a chat called \'julius\' to receive notifications automatically.**')
 };

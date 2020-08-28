@@ -35,5 +35,14 @@ Some downloads to use this repository:
 #### :v: Want to change something?
 
 - Make a fork
+- Create an application here [discord application](https://discord.com/developers/applications)
+- Go to: 'Bot' and accept it is a Bot
+- Configure your Bot(public or not)
+- Go to: 'General Information', copy your Client ID and click here: [permission calculator](https://discordapi.com/permissions.html#8)
+- At 'OAUTH Url Generator', put your client id at 'Client ID' and copy the Link or use it to add the bot to your server
+- Host the bot somewhere, I use repl.it
+- And I am using: [uptime bot](https://uptimerobot.com/) to notify when the bot is down
+
+OBS.: Don't forget to create a file called '.env' and write 'TOKEN=yourTokenHere' in it. The Token has to be secret, so take care about it.
 
 **Enjoy it :wink:**

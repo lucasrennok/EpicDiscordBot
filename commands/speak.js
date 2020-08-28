@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
-const translate = require('google-translate-open-api').default;
+const translate = require('google-translate-open-api').default; //Translator
 
+// Some speeches
 const phrases = [
     "Se eu não comprar nada, o desconto é maior.",
     "E quanto isso vai me custar??",
@@ -44,9 +45,11 @@ const phrases = [
     "Eu quero uma ligação a cobrar. Papai bem Nebrasca milharal Chris lixo desliga."
 ]
 
+//Send a speech
 module.exports.run = async (client, message, args) => {
     const somethingToSay = phrases[Math.floor(Math.random() * phrases.length)];
 
+    //Translate to english
     if(message.guild.region!=='brazil'){
       const result = await translate(somethingToSay, {
         tld: "pt",
@@ -56,5 +59,6 @@ module.exports.run = async (client, message, args) => {
       await message.channel.send("> "+translatedData);
       return;
     }
+    //Send the message
     await message.channel.send("> "+somethingToSay);
 };

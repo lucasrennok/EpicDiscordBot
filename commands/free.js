@@ -82,6 +82,7 @@ module.exports.run = async (client, message, args) => {
             try{
               formatStartDate = startDate.getDate()+'/'+(startDate.getMonth()+1)+'/'+startDate.getFullYear()
               formatEndDate = endDate.getDate()+'/'+(endDate.getMonth()+1)+'/'+endDate.getFullYear()
+              formatGameArriveDate = gameArriveDate.getDate()+'/'+(gameArriveDate.getMonth()+1)+'/'+gameArriveDate.getFullYear()
               if(gameArriveDate.getYear()>startDate.getYear()){
                 formatGameArriveDate = formatStartDate
               }

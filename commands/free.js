@@ -3,6 +3,17 @@ const fetch = require("node-fetch");
 
 const urlEpicFreeGames = "https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions";
 
+module.exports.getGamesStringify = async () => {
+  let someFreeGamesComing = 'ERROR'
+  await fetch(urlEpicFreeGames)
+        .then(response => response.json())
+        .then((data) => {
+            someFreeGamesComing = data.data.Catalog.searchStore.elements;
+            someFreeGamesComing = JSON.stringify(someFreeGamesComing)
+        });
+  return someFreeGamesComing;
+}
+
 module.exports.run = async (client, message, args) => {
     await message.channel.send("What would be better than a free game?")
     
@@ -73,6 +84,9 @@ module.exports.run = async (client, message, args) => {
               formatEndDate = endDate.getDate()+'/'+(endDate.getMonth()+1)+'/'+endDate.getFullYear()
               if(gameArriveDate.getYear()>startDate.getYear()){
                 formatGameArriveDate = formatStartDate
+              }
+              if(endDate.getDate()<=new Date().getDate()){
+                break;
               }
             }catch(err){
               console.log('Something went wrong: \n >>'+ err)

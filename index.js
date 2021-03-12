@@ -1,17 +1,24 @@
-const express = require('express'); 
+const express = require('express');
 const app = express();
 
+let freeEpicGamesSaved = 'Without games saved'
+
 // To look if the bot is up and to send free games automatically
-app.get("/", (request, response) => {
-  const ping = new Date();
-  
+app.get("/", async (request, response) => {
+
   //Ping at the console when receive a GET method
+  const ping = new Date();
   ping.setHours(ping.getHours() - 3);
   console.log(`Ping received at ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`);
 
-  //Send free games automatically at 'julius' chat
-  const dateNow = new Date()
-  if(dateNow.getDay()===4 && (dateNow.getHours()-3)===19 && dateNow.getMinutes()<=25){
+  const seeker = require('./commands/free.js');
+  const findNewGames = await seeker.getGamesStringify();
+  
+  console.log("NEW GAMES? ", freeEpicGamesSaved!=findNewGames)
+  if(freeEpicGamesSaved!=findNewGames){
+    freeEpicGamesSaved = findNewGames;
+
+    //Send free games automatically at 'julius' chat
     const guildList = client.guilds.cache;
     for(let i of guildList){
       const channel = i[1].channels.cache.find(channel => channel.name === 'julius')
@@ -23,10 +30,9 @@ app.get("/", (request, response) => {
     }
   }
 
-  //Send status 'OK'
   response.sendStatus(200);
 });
-app.listen(3333); //or process.env.PORT
+app.listen(process.env.PORT);
 
 const Discord = require("discord.js");
 const config = require("./config.json"); // bot prefix

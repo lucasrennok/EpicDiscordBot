@@ -46,7 +46,7 @@ client.on("ready", () => {
 
 //When the server got a new member
 client.on('guildMemberAdd', member => {
-  const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+  const channel = member.guild.channels.cache.find(ch => ch.name === 'julius');
   if (!channel) return;
   channel.send("Welcome, "+member,". It will cost you a dollar.");
 });

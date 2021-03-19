@@ -15,7 +15,10 @@ module.exports.getGamesStringify = async () => {
 }
 
 module.exports.run = async (client, message, args) => {
-    await message.channel.send("What would be better than a free game?")
+    let initialMessageSuccess = "What would be better than a free game?";
+    let initialMessageError = "The API is updating...";
+    let messagesThatWillSend = [];
+    messagesThatWillSend.push(initialMessageSuccess);
     
     let free_flag = 'all';
     if(args.length>1){
@@ -37,8 +40,8 @@ module.exports.run = async (client, message, args) => {
             someFreeGamesComing = data.data.Catalog.searchStore.elements;
         });
 
-    let startDate = 'undefined'
-    let endDate = 'undefined'
+    let startDate = 'undefined';
+    let endDate = 'undefined';
     for(let i=0; i<someFreeGamesComing.length; i++){
         if(someFreeGamesComing[i].promotions!==null){
             if(someFreeGamesComing[i].promotions.promotionalOffers.length!==0){
@@ -123,7 +126,15 @@ module.exports.run = async (client, message, args) => {
                 .setImage(encodeURI(gameImage))
                 .setTimestamp()
                 .setFooter('Game Arrived/Arrive in Epic Games: '+ formatGameArriveDate);
-            await message.channel.send(embedFreeGame);
+            messagesThatWillSend.push(embedFreeGame);
         }
+    }
+
+    if(messagesThatWillSend.length==1){
+        await message.channel.send(initialMessageError);
+        return;
+    }
+    for(let i=0; i<messagesThatWillSend.length; i++){
+        await message.channel.send(messagesThatWillSend[i]);
     }
 };
